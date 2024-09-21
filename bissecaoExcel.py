@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 def calcularRaiz(f, a, b, erro): 
-    iteracoes = []  # Lista para armazenar as iterações
+    iteracoes = []  
     
     if np.sign(f(a)) == np.sign(f(b)):
         raise Exception("Intervalo inválido!")
@@ -19,7 +19,7 @@ def calcularRaiz(f, a, b, erro):
         else:
             b = m
             
-    return m, iteracoes  # Retorna a raiz e as iterações
+    return m, iteracoes
 
 def f1(x):
     return round(np.sqrt(5 - x) - 2 ** (x - 1), 6)
@@ -27,16 +27,24 @@ def f1(x):
 def f2(x):
     return round(np.log(3 * x - 1) + 2 * x, 6)
 
-# Exemplo de uso
+def f3(x):
+    return round(x + 5 * np.log(x) - 2, 6)
+
+
 raizEx1, iteracoesEx1 = calcularRaiz(f1, 1, 2, 0.01)
 raizEx2, iteracoesEx2 = calcularRaiz(f2, 0.34, 0.5, 0.01)
+raizEx3, iteracoesEx3 = calcularRaiz(f3, 1, 5, 0.01)
 
-# Criar DataFrame e salvar em Excel
+
 df = pd.DataFrame(iteracoesEx1)
 df.to_excel("Exercicio1.xlsx", index=False)
 
 df = pd.DataFrame(iteracoesEx2)
 df.to_excel("Exercicio2.xlsx", index=False)
 
+df = pd.DataFrame(iteracoesEx3)
+df.to_excel("Exercicio3.xlsx", index=False)
+
 print(round(raizEx1, 6))
 print(round(raizEx2, 6))
+print(round(raizEx3, 6))
